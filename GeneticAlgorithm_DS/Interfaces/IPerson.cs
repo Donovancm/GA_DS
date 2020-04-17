@@ -10,5 +10,7 @@ namespace GeneticAlgorithm_DS.Interfaces
     {
         string Form { get; set; }
         int Pregnant { get; set; }
+
+        double Prediction { get; set; }
     }
 }

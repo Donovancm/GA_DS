@@ -30,17 +30,21 @@ namespace GeneticAlgorithm_DS
             //Work in progress
             columns = xlRange.Columns.Count;
 
-            for (int i = 8; i <= 1008; i++)
+            for (int i = 8; i <= 13; i++)
             {
                 Person person = new Person();
                 var form = "";
-                for (int j = 2; j <= 22; j++)
+                for (int j = 2; j <= 23; j++)
                 {
-                    if(j == 22) 
+                    if (j == 22)
                     {
-                        person.Pregnant = int.Parse(xlRange.Cells[i, j].Value2.ToString()); 
+                        person.Pregnant = int.Parse(xlRange.Cells[i, j].Value2.ToString());
                     }
-                    else if ( j<=20 && xlRange.Cells[i, j] != null && xlRange.Cells[i, j].value2 != null)
+                    else if(j == 23)
+                    {
+                        person.Prediction = double.Parse(xlRange.Cells[i, j].Value2.ToString());
+                    }
+                    else if (j <= 20 && xlRange.Cells[i, j] != null && xlRange.Cells[i, j].value2 != null)
                     {
                         form = String.Concat(form, xlRange.Cells[i, j].Value2.ToString());
                         //To print the result

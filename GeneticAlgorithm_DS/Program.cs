@@ -1,3 +1,4 @@
+using GeneticAlgorithm_DS.Calculations;
 using GeneticAlgorithm_DS.Models;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace GeneticAlgorithm_DS
             Console.WriteLine("Hello World!");
             List<Person> population = new List<Person>();
             FileReader.ReadFile(population);
+            Fitness.CalculateSSE(population);
             Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 

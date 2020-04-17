@@ -11,5 +11,7 @@ namespace GeneticAlgorithm_DS.Models
     {
         public string Form { get; set; }
         public int Pregnant { get ; set; }
+
+        public double Prediction { get; set; }
     }
 }

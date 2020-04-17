@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations\Fitness.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="Interfaces\IPerson.cs" />
     <Compile Include="Models\Person.cs" />
