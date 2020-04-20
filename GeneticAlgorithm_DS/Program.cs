@@ -16,8 +16,11 @@ namespace GeneticAlgorithm_DS
             // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
             Console.WriteLine("Hello World!");
             List<Person> population = new List<Person>();
+            List<double> coefficient = new List<double>();
+            FileReader.CoefficientRead(coefficient);
             FileReader.ReadFile(population);
             Fitness.CalculateSSE(population);
+            Fitness.CalculateCoefSSE(coefficient,population);
             Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 

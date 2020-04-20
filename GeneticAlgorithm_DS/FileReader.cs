@@ -12,19 +12,36 @@ namespace GeneticAlgorithm_DS
 {
     public class FileReader
     {
+        public static string envPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        public static string filePath = envPath + "/Files/RetailMart.xlsx";
+
+        public static Excel.Application xlApp = new Excel.Application();
+        public static Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(filePath);
+        public static Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[3];
+        public static Excel.Range xlRange = xlWorksheet.UsedRange;
+
+        //Seperate methods for reading different parts
+        //method about Coefficient read || method about Population read for readability
+        public static List<double> CoefficientRead(List<double> coefficientList)
+        {
+           
+            //row 2
+            for (int i = 2; i <= 2; i++)
+            {
+                //column 2 ----> 21
+                for (int j = 2; j <= 20; j++)
+                {
+                    coefficientList.Add(double.Parse(xlRange.Cells[i, j].Value2.ToString()));
+                }
+            }
+
+            return coefficientList;
+        }
         public static void ReadFile(List<Person> population)
         {
-            var envPath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-            var filePath = envPath + "/Files/RetailMart.xlsx";
-            List<string> list = new List<string>();
-
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(filePath);
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[3];
-            Excel.Range xlRange = xlWorksheet.UsedRange;
-
             int rows;
             int columns;
+            List<string> list = new List<string>();
 
             rows = xlRange.Rows.Count;
             //Work in progress
