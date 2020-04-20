@@ -11,6 +11,7 @@ namespace GeneticAlgorithm_DS.Interfaces
         string Form { get; set; }
         int Pregnant { get; set; }
         double Fitness { get; set; }
+        double NormalizedFitness { get; set; }
         double Prediction { get; set; }
     }
 }

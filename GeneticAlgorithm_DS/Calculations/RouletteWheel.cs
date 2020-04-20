@@ -16,6 +16,7 @@ namespace GeneticAlgorithm_DS.Calculations
         public static double SumNormalisation = 0.0;
         public static List<Person> population;
 
+        public static List<double> Values { get { return values; } }
         public static void DoCalculation(List<Person> data)
         {
             population = data;
@@ -37,7 +38,9 @@ namespace GeneticAlgorithm_DS.Calculations
         {
             foreach (var person in population)
             {
-                values.Add(1 - (person.Fitness / sumFitness));
+                double normalizeFitness = 1 - (person.Fitness / sumFitness);
+                values.Add(normalizeFitness);
+                person.NormalizedFitness = normalizeFitness;
             }
         }
         //Stap 4
