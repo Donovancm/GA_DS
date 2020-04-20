@@ -21,6 +21,12 @@ namespace GeneticAlgorithm_DS
             FileReader.ReadFile(population);
             Fitness.CalculateSSE(population);
             Fitness.CalculateCoefSSE(coefficient,population);
+
+            //Stap 1 t/m 5
+            RouletteWheel.DoCalculation(population);
+
+
+
             Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 

@@ -22,22 +22,22 @@ namespace GeneticAlgorithm_DS.Calculations
 
         //Fitness (Coefficient * Cell) + next 
         //Betere naam verzinnen
-        public static double CalculateCoefSSE(List<double> coeff, List<Person> population)
+        public static void CalculateCoefSSE(List<double> coeff, List<Person> population)
         {
             var coeffArray = coeff.ToArray();
             //Fitness (Coefficient * Cell) + next
-            double sse = 0.0;
+            
             foreach (var person in population)
             {
+                double sse = 0.0;
                 Int32[] formArray = person.Form.Select(x => Int32.Parse(x.ToString())).ToArray();
                // var formArray = person.Form.ToCharArray();
                 for (int i = 0; i < 19; i++)
                 {
                     sse += coeffArray[i] * formArray[i];
                 }
-               
+                person.Fitness = sse;               
             }
-            return sse;
         }
     }
 }
