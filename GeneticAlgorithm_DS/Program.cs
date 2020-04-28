@@ -29,8 +29,8 @@ namespace GeneticAlgorithm_DS
             RouletteWheel.DoCalculation(population);
 
             //Crossover Methods
-            SinglePointCrossover.DoCrossover(coupleParents, crossoverChildren);
-          
+            //SinglePointCrossover.DoCrossover(coupleParents, crossoverChildren);
+            TwoPointCrossover.DoCrossover(coupleParents, crossoverChildren);
 
             Console.ReadKey();
 

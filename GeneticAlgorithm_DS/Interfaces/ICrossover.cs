@@ -12,6 +12,6 @@ namespace GeneticAlgorithm_DS.Interfaces
         //Divide
         //Combine
         void CreateChildren();
-        string Combine(Person parentForm, string parentSubForm, int startPoint);
+        string Combine(string form, string parentSubForm);
     }
 }
