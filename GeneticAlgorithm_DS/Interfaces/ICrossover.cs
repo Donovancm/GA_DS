@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeneticAlgorithm_DS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace GeneticAlgorithm_DS.Interfaces
     {
         //Divide
         //Combine
-        void Divide();
-        void Combine();
+        void CreateChildren();
+        string Combine(Person parentForm, string parentSubForm, int startPoint);
     }
 }

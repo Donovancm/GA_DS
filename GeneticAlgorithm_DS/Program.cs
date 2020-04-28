@@ -19,6 +19,7 @@ namespace GeneticAlgorithm_DS
             List<Person> population = new List<Person>();
             List<double> coefficient = new List<double>();
             List<CoupleParent> coupleParents = new List<CoupleParent>();
+            List<string> crossoverChildren = new List<string>();
             FileReader.CoefficientRead(coefficient);
             FileReader.ReadFile(population);
             Fitness.CalculateSSE(population);
@@ -28,7 +29,7 @@ namespace GeneticAlgorithm_DS
             RouletteWheel.DoCalculation(population);
 
             //Crossover Methods
-            SinglePointCrossover.DoCrossover(coupleParents);
+            SinglePointCrossover.DoCrossover(coupleParents, crossoverChildren);
           
 
             Console.ReadKey();

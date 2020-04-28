@@ -14,14 +14,17 @@ namespace GeneticAlgorithm_DS.Calculations
         public static double CrossoverRate = 0.8;
         public static List<double> parents = new List<double>();
         public static List<CoupleParent> cParents;
-
-        public static void DoCrossover(List<CoupleParent> coupleParents)
+        public static List<string> children;
+        public static void DoCrossover(List<CoupleParent> coupleParents, List<string> crossoverChildren)
         {
             cParents = coupleParents;
+            children = crossoverChildren;
             SelectionParents();
             SelectionParentsCouple();
             ICrossover iCrossover = new SinglePointCrossover();
-            iCrossover.Divide();
+            iCrossover.CreateChildren();
+            //child1
+            //child2
         }
         public static void SelectionParents()
         {
@@ -53,7 +56,7 @@ namespace GeneticAlgorithm_DS.Calculations
                 cParents.Add(couples);
             }
         }
-        public void Divide()
+        public  void CreateChildren()
         {
             //
             foreach (var parent in cParents)
@@ -61,14 +64,55 @@ namespace GeneticAlgorithm_DS.Calculations
                 Person parentForm1 = RouletteWheel.population.Find(x => x.NormalizedFitness == parent.Parent1);
                 Person parentForm2 = RouletteWheel.population.Find(x => x.NormalizedFitness == parent.Parent2);
                 Random random = new Random();
-                int singlePointPosition = random.Next(0,18);
-                // divide the form first
-                // call combine function
+
+                //Zet de eerste punt
+               int singlePointPosition = random.Next(1,18);
+
+                Console.WriteLine(singlePointPosition);
+                var parent1SubForm = Divide(parentForm1.Form, singlePointPosition);
+                var parent2SubForm = Divide(parentForm2.Form, singlePointPosition);
+                Console.WriteLine(parent1SubForm);
+                Console.WriteLine(parent2SubForm);
+                var child1 = Combine(parentForm1, parent2SubForm, singlePointPosition);
+
+                var child2 = Combine(parentForm2, parent1SubForm, singlePointPosition);
+                children.Add(child1);
+                children.Add(child2);
             }
         }
-        public void Combine()
+
+        public string Divide(string form, int startPosition)
+        {
+            var array =  form.ToCharArray();
+            var subTemp = "";
+            for (int index = startPosition; index < array.Length; index++)
+            {
+                string subString = array[index].ToString();
+                var temp = String.Concat(subTemp, subString);
+                subTemp = temp;
+            }
+            return subTemp;
+        }
+        public string Combine(Person parentForm, string parentSubForm, int startPoint)
         {
             //lijst van 2 helften t.b.c
+            var array = parentForm.Form.ToCharArray();
+            var child = "";
+            for (int i = 0; i < array.Length; i++)
+            {
+                //eerste helft tot start point combineren.
+                if (i < startPoint)
+                {
+                    string subString = array[i].ToString();
+                    var temp = String.Concat(child, subString);
+                    child = temp;
+                }
+
+            }
+            //tweede helft met eerste combineren.
+            var tempChild = String.Concat(child, parentSubForm);
+            child = tempChild;
+            return child;
         }
     }
 }
