@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations\Elitism.cs" />
     <Compile Include="Calculations\Fitness.cs" />
+    <Compile Include="Calculations\Mutation.cs" />
     <Compile Include="Calculations\RouletteWheel.cs" />
     <Compile Include="Calculations\SinglePointCrossover.cs" />
     <Compile Include="Calculations\TwoPointCrossover.cs" />
