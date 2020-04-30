@@ -35,6 +35,8 @@ namespace GeneticAlgorithm_DS
             //Mutation 
             Mutation.MutationChildren(crossoverChildren);
 
+            //Recalculate Fitness for Childrens
+            List<Person> childrenPopulation = Fitness.CalculateCoefSSEChild(coefficient, crossoverChildren);
             Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 

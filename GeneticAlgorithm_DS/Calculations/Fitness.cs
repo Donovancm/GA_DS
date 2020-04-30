@@ -39,5 +39,26 @@ namespace GeneticAlgorithm_DS.Calculations
                 person.Fitness = sse;               
             }
         }
+
+        //Fitness (Coefficient * Cell) + next 
+        //Betere naam verzinnen
+        public static List<Person> CalculateCoefSSEChild(List<double> coeff, List<string> children)
+        {
+            var coeffArray = coeff.ToArray();
+            List<Person> childPopulation = new List<Person>();
+
+            foreach (var child in children)
+            {
+                double sse = 0.0;
+                Int32[] formArray = child.Select(x => Int32.Parse(x.ToString())).ToArray();
+                // var formArray = person.Form.ToCharArray();
+                for (int i = 0; i < 19; i++)
+                {
+                    sse += coeffArray[i] * formArray[i];
+                }
+                childPopulation.Add(new Person() { Form = child, Fitness = sse });
+            }
+            return childPopulation;
+        }
     }
 }
