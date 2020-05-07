@@ -37,7 +37,7 @@ namespace GeneticAlgorithm_DS
 
             return coefficientList;
         }
-        public static void ReadFile(List<Person> population)
+        public static void ReadFile(List<Person> population, int populationAmount)
         {
             int rows;
             int columns;
@@ -47,7 +47,7 @@ namespace GeneticAlgorithm_DS
             //Work in progress
             columns = xlRange.Columns.Count;
 
-            for (int i = 8; i <= 13; i++)
+            for (int i = 8; i <= (8+populationAmount); i++)
             {
                 Person person = new Person();
                 var form = "";

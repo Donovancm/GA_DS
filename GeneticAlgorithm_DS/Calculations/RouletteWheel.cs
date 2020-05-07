@@ -12,13 +12,14 @@ namespace GeneticAlgorithm_DS.Calculations
         //Stap 1
         public static double sumFitness = 0.0;
         //Stap 2
-        public static List<double> values = new List<double>();
+        public static List<double> values;
         public static double SumNormalisation = 0.0;
         public static List<Person> population;
 
         public static List<double> Values { get { return values; } }
         public static void DoCalculation(List<Person> data)
         {
+            values = new List<double>();
             population = data;
             CalculateSumFitness();
             CalculateValues();

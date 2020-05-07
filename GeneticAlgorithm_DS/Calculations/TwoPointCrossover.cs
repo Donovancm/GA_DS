@@ -11,16 +11,19 @@ namespace GeneticAlgorithm_DS.Calculations
     class TwoPointCrossover : ICrossover
 
     {
+        public static List<Person> population;
         public static List<double> normalizedValues = RouletteWheel.Values;
-        public static double CrossoverRate = 0.8;
+        public static double CrossoverRate;
         public static List<double> parents = new List<double>();
         public static List<CoupleParent> cParents;
         public static List<string> children;
         public int firstPointPosition;
         public int secondPointPosition;
 
-        public static void DoCrossover(List<CoupleParent> coupleParents, List<string> crossoverChildren)
+        public static void DoCrossover(List<CoupleParent> coupleParents, List<string> crossoverChildren, double crossOverPercentage, List<Person> populations)
         {
+            population = populations;
+            CrossoverRate = crossOverPercentage;
             cParents = coupleParents;
             children = crossoverChildren;
             SelectionParents();
@@ -71,14 +74,14 @@ namespace GeneticAlgorithm_DS.Calculations
                 //Zet de eerste punt
                 firstPointPosition = random.Next(1,18);
                 secondPointPosition = random.Next(firstPointPosition + 1,18); //TODO: Optimize random generator
-                Console.WriteLine(firstPointPosition);
-                Console.WriteLine(secondPointPosition);
+                //Console.WriteLine(firstPointPosition);
+                //Console.WriteLine(secondPointPosition);
 
                 var parent1SubForm = Divide(parentForm1.Form);
                 var parent2SubForm = Divide(parentForm2.Form);
 
-                Console.WriteLine(parent1SubForm);
-                Console.WriteLine(parent2SubForm);
+                //Console.WriteLine(parent1SubForm);
+                //Console.WriteLine(parent2SubForm);
                 var child1 = Combine(parentForm1.Form, parent2SubForm);
 
                 var child2 = Combine(parentForm2.Form, parent1SubForm);

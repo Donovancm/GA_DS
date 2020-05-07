@@ -2,6 +2,7 @@
 using GeneticAlgorithm_DS.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +11,18 @@ namespace GeneticAlgorithm_DS.Calculations
 {
     public class SinglePointCrossover : ICrossover
     {
+        public static List<Person> population;
         public static List<double> normalizedValues = RouletteWheel.Values;
-        public static double CrossoverRate = 0.8;
-        public static List<double> parents = new List<double>();
+        public static double CrossoverRate;
+        public static List<double> parents;
         public static List<CoupleParent> cParents;
         public static List<string> children;
         public int startPoint;
-        public static void DoCrossover(List<CoupleParent> coupleParents, List<string> crossoverChildren)
+        public static void DoCrossover(List<CoupleParent> coupleParents, List<string> crossoverChildren, double crossOverPercentage, List<Person> populations)
         {
+            parents = new List<double>();
+            population = populations;
+            CrossoverRate = crossOverPercentage;
             cParents = coupleParents;
             children = crossoverChildren;
             SelectionParents();
@@ -69,11 +74,11 @@ namespace GeneticAlgorithm_DS.Calculations
                 //Zet de eerste punt
                 startPoint = random.Next(1,18);
 
-                Console.WriteLine(startPoint);
+                //Console.WriteLine(startPoint);
                 var parent1SubForm = Divide(parentForm1.Form, startPoint);
                 var parent2SubForm = Divide(parentForm2.Form, startPoint);
-                Console.WriteLine(parent1SubForm);
-                Console.WriteLine(parent2SubForm);
+                //Console.WriteLine(parent1SubForm);
+                //Console.WriteLine(parent2SubForm);
                 var child1 = Combine(parentForm1.Form, parent2SubForm);
 
                 var child2 = Combine(parentForm2.Form, parent1SubForm);
