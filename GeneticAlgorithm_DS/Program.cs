@@ -36,7 +36,7 @@ namespace GeneticAlgorithm_DS
             Console.WriteLine("Set the amount of iterations");
             iterations = int.Parse(Console.ReadLine());
             //Single or TwoPoint
-            ICrossover iCrossOver = null;
+            //ICrossover iCrossOver = null;
         }
         public static void RunGeneticAlgorithm()
         {
@@ -57,7 +57,7 @@ namespace GeneticAlgorithm_DS
                 //Recalculate Fitness for Childrens
                 List<Person> childrenPopulation = Fitness.CalculateCoefSSEChild(coefficient, crossoverChildren);
                 //Elitism best solution
-                RunElitism(i, childrenPopulation, population);
+                RunElitism(i, childrenPopulation);
             }
         }
 
@@ -77,17 +77,18 @@ namespace GeneticAlgorithm_DS
 
         }
 
-        public static void RunElitism(int idx, List<Person> childrenPopulation, List<Person> population)
+        public static void RunElitism(int idx, List<Person> childrenPopulation)
         {
             if (idx > 0)
             {
-                if (bestPerson != Elitism.ChildHighestFit(childrenPopulation))
+                var blabla = Elitism.ChildHighestFit(childrenPopulation, crossOverPercentage);
+                if (bestPerson.NormalizedFitness != blabla.NormalizedFitness)
                 {
-                    bestPerson = Elitism.ChildHighestFit(childrenPopulation);
+                    bestPerson = blabla;
                     
                 }
             }
-            else if (bestPerson == null) { bestPerson = Elitism.ChildHighestFit(childrenPopulation);   }
+            else if (bestPerson == null) { bestPerson = Elitism.ChildHighestFit(childrenPopulation, crossOverPercentage);   }
         }
 
         public static void RunExampleOnce()
@@ -115,7 +116,7 @@ namespace GeneticAlgorithm_DS
             List<Person> childrenPopulation = Fitness.CalculateCoefSSEChild(coefficient, crossoverChildren);
 
             //Elitism best solution
-            var bestPerson = Elitism.ChildHighestFit(childrenPopulation);
+            var bestPerson = Elitism.ChildHighestFit(childrenPopulation, crossOverPercentage);
             Console.ReadKey();
         }
 

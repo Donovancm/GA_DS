@@ -10,15 +10,17 @@ namespace GeneticAlgorithm_DS.Calculations
     public static class RouletteWheel
     {
         //Stap 1
-        public static double sumFitness = 0.0;
+        public static double sumFitness;
         //Stap 2
         public static List<double> values;
-        public static double SumNormalisation = 0.0;
+        public static double SumNormalisation;
         public static List<Person> population;
 
         public static List<double> Values { get { return values; } }
         public static void DoCalculation(List<Person> data)
         {
+            sumFitness = 0.0;
+            SumNormalisation = 0.0;
             values = new List<double>();
             population = data;
             CalculateSumFitness();
@@ -40,8 +42,8 @@ namespace GeneticAlgorithm_DS.Calculations
             foreach (var person in population)
             {
                 double normalizeFitness = 1 - (person.Fitness / sumFitness);
-                values.Add(normalizeFitness);
-                person.NormalizedFitness = normalizeFitness;
+                values.Add(Math.Abs(normalizeFitness));
+                person.NormalizedFitness = Math.Abs(normalizeFitness);
             }
         }
         //Stap 4

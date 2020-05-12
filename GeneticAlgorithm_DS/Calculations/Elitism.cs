@@ -13,22 +13,22 @@ namespace GeneticAlgorithm_DS.Calculations
         //50 ---> 50 ---> de hoogste fitness bewaren --->
         //
         public static double bestSolution = 0.0;
-        public static Person ChildHighestFit(List<Person> children)
+        public static Person bestCandidite = new Person();
+        public static Person ChildHighestFit(List<Person> children, double crossOverPercentage)
         {
             List<Person> bestCandidites = new List<Person>();
-            var bestCandite = new Person();
             RouletteWheel.DoCalculation(children);
             if (bestSolution == 0)
             {
                 foreach (var child in children)
                 {
-                    if (child.NormalizedFitness > 0.8)
+                    if (child.NormalizedFitness > crossOverPercentage)
                     {
                         bestCandidites.Add(child);
                     }
                 }
                 bestSolution = bestCandidites.Max(candidates => candidates.NormalizedFitness);
-                bestCandite = bestCandidites.FirstOrDefault(candidates => candidates.NormalizedFitness == bestSolution);
+                bestCandidite = bestCandidites.FirstOrDefault(candidates => candidates.NormalizedFitness == bestSolution);
             }
             else
             {
@@ -46,10 +46,11 @@ namespace GeneticAlgorithm_DS.Calculations
                 if (bestCandidites.Count != 0)
                 {
                     bestSolution = bestCandidites.Max(candidates => candidates.NormalizedFitness);
-                    bestCandite = bestCandidites.FirstOrDefault(candidates => candidates.NormalizedFitness == bestSolution);
+                    bestCandidite = bestCandidites.FirstOrDefault(candidates => candidates.NormalizedFitness == bestSolution);
                 }
             }
-            return bestCandite;
+            Console.WriteLine(bestCandidite.NormalizedFitness);
+            return bestCandidite;
         }
     }
 }

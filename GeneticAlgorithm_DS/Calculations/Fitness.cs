@@ -16,6 +16,7 @@ namespace GeneticAlgorithm_DS.Calculations
             foreach (var person in population)
             {
                sse += Math.Pow(person.Pregnant - person.Prediction, 2);
+               person.Fitness = Math.Abs(sse);
             }
             return sse;
         }
@@ -34,9 +35,9 @@ namespace GeneticAlgorithm_DS.Calculations
                // var formArray = person.Form.ToCharArray();
                 for (int i = 0; i < 19; i++)
                 {
-                    sse += coeffArray[i] * formArray[i];
+                    sse = Math.Abs(coeffArray[i] * formArray[i]) + sse;
                 }
-                person.Fitness = sse;               
+                person.Fitness = Math.Abs(sse);               
             }
         }
 
@@ -54,7 +55,7 @@ namespace GeneticAlgorithm_DS.Calculations
                 // var formArray = person.Form.ToCharArray();
                 for (int i = 0; i < 19; i++)
                 {
-                    sse += coeffArray[i] * formArray[i];
+                    sse = Math.Abs(coeffArray[i] * formArray[i]) + sse;
                 }
                 childPopulation.Add(new Person() { Form = child, Fitness = sse });
             }
