@@ -15,16 +15,57 @@ namespace GeneticAlgorithm_DS
         public static double crossOverPercentage;
         public static int iterations;
         public static Person bestPerson;
+        public static int userOptions;
+        public static int _selectedPerson;
         static void Main(string[] args)
         {
-            UserInputs();
+            ChooseOptions();
+            /*UserInputsFitness();
             RunGeneticAlgorithm();
             //RunExampleOnce();
             Console.WriteLine("Best solution fitness: " + bestPerson.NormalizedFitness);
             Console.WriteLine("Finished");
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
-        public static void UserInputs()
+        public static void ChooseOptions()
+        {
+            Console.WriteLine("Press 1 for Calculate new fitness or press 2 for prediction");
+            userOptions = int.Parse(Console.ReadLine());
+            switch (userOptions)
+            {
+                case 1:
+                    UserInputsFitness();
+                    RunGeneticAlgorithm();
+                    //RunExampleOnce();
+                    Console.WriteLine("Best solution fitness: " + bestPerson.NormalizedFitness);
+                    Console.WriteLine("Finished");
+                    Console.ReadLine();
+                    break;
+                case 2:
+                    UserInputsPrediction();
+                    RunPrediction();
+                    Console.WriteLine("Finished");
+                    Console.ReadLine();
+                    break;
+                default:
+                    break;
+            }
+        }
+        public static void UserInputsPrediction()
+        {
+            Console.WriteLine("select person betwee 1 to 10");
+            _selectedPerson = int.Parse(Console.ReadLine());
+        }
+
+        public static void RunPrediction()
+        {
+            List<Person> population = new List<Person>();
+            List<double> coefficient = new List<double>();
+            FileReader.CoefficientRead(coefficient);
+            FileReader.ReadFile(population, 10);
+            Prediction.CalcPrediction(coefficient, population, _selectedPerson);
+        }
+        public static void UserInputsFitness()
         {
             //Populatie kiezen
             Console.WriteLine("Set the amount of persons");
